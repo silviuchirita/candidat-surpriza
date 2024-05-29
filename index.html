@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alege o zodie și vezi ce candidat ți se potrivește</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="text-center">
+        Candidatul care ți se potrivește după zodia ta
+      </h1>
+      <div class="row justify-content-center mt-3">
+        <div class="col-md-6">
+          <select class="form-control" id="zodie-select" name="zodie-select">
+            <option value="">Selectează-ți zodia</option>
+            <option value="berbec">Berbec</option>
+            <option value="taur">Taur</option>
+            <option value="gemeni">Gemeni</option>
+            <option value="rac">Rac</option>
+            <option value="leu">Leu</option>
+            <option value="fecioara">Fecioară</option>
+            <option value="balanta">Balanță</option>
+            <option value="scorpion">Scorpion</option>
+            <option value="sagetator">Săgetător</option>
+            <option value="capricorn">Capricorn</option>
+            <option value="varsator">Vărsător</option>
+            <option value="pesti">Pești</option>
+          </select>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-3">
+        <div class="col-md-6">
+          <button
+            class="btn btn-primary btn-block"
+            onclick="filtrareCandidati()"
+          >
+            Alege
+          </button>
+        </div>
+      </div>
+      <div id="rezultate" class="mt-5">
+        <!-- Rezultatele vor fi afișate aici -->
+      </div>
+    </div>
+
+    <script>
+      const candidati = [
+        {
+          nume: 'Gabriela Firea',
+          zodie: 'Rac',
+          partid: 'PSD',
+        },
+        {
+          nume: 'Sebastian Burduja',
+          zodie: 'Balanță',
+          partid: 'PNL',
+        },
+        {
+          nume: 'Nicuşor Dan',
+          zodie: 'Săgetător',
+          partid: 'independent',
+        },
+        {
+          nume: 'Cristian Victor Popescu Piedone',
+          zodie: 'Vărsător',
+          partid: 'PUSL',
+        },
+        {
+          nume: 'Diana Şoşoacă Iovanovici',
+          zodie: 'Scorpion',
+          partid: 'S.O.S. România',
+        },
+        {
+          nume: 'Clotilde Armand',
+          partid: 'USR',
+          zodie: 'Rac',
+        },
+        {
+          nume: 'Radu Nicolae-Mihaiu',
+          partid: 'Alianţa Dreapta Unită (USR – PMP – Forţa Dreptei)',
+          zodie: 'Berbec',
+        },
+        {
+          nume: 'Rareş Hopincă',
+          partid: 'Alianţa Electorală PSD PNL',
+          zodie: 'Scorpion',
+        },
+        {
+          nume: 'Andrei Tinu',
+          partid: 'AUR',
+          zodie: 'Taur',
+        },
+        {
+          nume: 'Iolanda Luminiţa Bughiu',
+          partid: 'Partidul S.O.S. România',
+          zodie: 'Fecioara',
+        },
+        {
+          nume: 'Ciprian Ciucu',
+          partid: 'Alianța Electorală PSD PNL',
+          zodie: 'Capricorn',
+        },
+      ];
+
+      function filtrareCandidati() {
+        const zodieSelectata = document.getElementById('zodie-select').value;
+        console.log(zodieSelectata);
+        const rezultate = document.getElementById('rezultate');
+        rezultate.innerHTML = ''; // Curăță rezultatele anterioare
+
+        if (zodieSelectata) {
+          const candidatiFiltrati = candidati.filter(
+            (candidat) => candidat.zodie.toLowerCase() === zodieSelectata
+          );
+
+          candidatiFiltrati.forEach((candidat) => {
+            const candidateName = document.createElement('h3');
+            candidateName.textContent = `Primarul tau este: ${candidat.nume}
+             de la ${candidat.partid}`;
+            rezultate.appendChild(candidateName);
+          });
+
+          if (candidatiFiltrati.length === 0) {
+            rezultate.textContent =
+              'Nu există candidați pentru zodia selectată.';
+          }
+        } else {
+          rezultate.textContent = 'Te rog selectează o zodie.';
+        }
+      }
+    </script>
+  </body>
+</html>
