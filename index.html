@@ -48,13 +48,7 @@
           </button>
         </div>
       </div>
-      <div class="anim">
-        <div class="📦"></div>
-        <div class="📦"></div>
-        <div class="📦"></div>
-        <div class="📦"></div>
-      </div>
-      <div id="rezultate" class="mt-5">
+      <div id="rezultate" class="mt-5 text-center">
       </div>
     </div>
 
@@ -210,11 +204,11 @@
 
           if(candidatiFiltrati.lenght >= 2){
             const position = Math.floor(Math.random() * 10) + 1;
-            candidateName.textContent = `<center>${candidatiFiltrati[position].nume}</center>
-             de la ${candidatiFiltrati[position].partid}`;
+            candidateName.textContent = `${candidatiFiltrati[position].nume},
+            ${candidatiFiltrati[position].partid}`;
           } else {
-            candidateName.textContent = `${candidatiFiltrati[0].nume}
-             de la ${candidatiFiltrati[0].partid}`;
+            candidateName.textContent = `${candidatiFiltrati[0].nume},
+            ${candidatiFiltrati[0].partid}`;
           }
 
           // candidatiFiltrati.forEach((candidat) => {
