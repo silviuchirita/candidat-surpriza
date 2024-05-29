@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alege o zodie și vezi ce candidat ți se potrivește</title>
+    <style>
+      .anim {
+          display: none;
+      }
+  </style>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -17,7 +22,7 @@
       <div class="row justify-content-center mt-3">
         <div class="col-md-6">
           <select class="form-control" id="zodie-select" name="zodie-select">
-            <option value="">Selectează-ți zodia</option>
+            <option value="">Selectează zodia</option>
             <option value="berbec">Berbec</option>
             <option value="taur">Taur</option>
             <option value="gemeni">Gemeni</option>
@@ -37,18 +42,31 @@
         <div class="col-md-6">
           <button
             class="btn btn-primary btn-block"
-            onclick="filtrareCandidati()"
+            onclick="filtrareCandidati();"
           >
             Alege
           </button>
         </div>
       </div>
+      <div class="anim">
+        <div class="📦"></div>
+        <div class="📦"></div>
+        <div class="📦"></div>
+        <div class="📦"></div>
+      </div>
       <div id="rezultate" class="mt-5">
-        <!-- Rezultatele vor fi afișate aici -->
       </div>
     </div>
 
     <script>
+      function showDiv() {
+        const div = document.querySelector('.anim');
+        div.style.display = 'block'; // Show the div
+        setTimeout(() => {
+          div.style.display = 'none';
+        }, 2000); 
+      }
+
       const candidati = [
         {
           nume: 'Gabriela Firea',
@@ -105,26 +123,108 @@
           partid: 'Alianța Electorală PSD PNL',
           zodie: 'Capricorn',
         },
+        {
+          nume: 'Ana Maria Mihaela Ștefan',
+          partid: 'Alianța Dreapta Unită USR-PMP-Forța Dreptei',
+          zodie: 'Scorpion',
+        },
+        {
+          nume: 'Monica Iagăr',
+          partid: 'AUR',
+          zodie: 'Berbec',
+        },
+        {
+          nume: 'Robert Negoiță',
+          partid: 'Alianța Electorală PSD PNL',
+          zodie: 'Pesti',
+        },
+        {
+          nume: 'Daniel Băluță',
+          partid: 'PSD',
+          zodie: 'Săgetător',
+        },
+        {
+          nume: 'Florin Petcu',
+          partid: 'PNL',
+          zodie: 'Leu',
+        },
+        {
+          nume: 'Adriana Gârbea',
+          partid: 'USR',
+          zodie: 'Gemeni',
+        },
+        {
+          nume: 'Adrian Vigheciu',
+          partid: 'Alianța Electorală PSD PNL',
+          zodie: 'Gemeni',
+        },
+        {
+          nume: 'Vlad Popescu Piedone',
+          partid: 'PPUSL',
+          zodie: 'Scorpion',
+        },
+        {
+          nume: 'Marian Vanghelie',
+          partid: 'Independent',
+          zodie: 'Taur',
+        },
+        {
+          nume: 'Ciprian Ciucu',
+          partid: 'Alianţa Electorală PSD PNL',
+          zodie: 'Leu',
+        },
+        {
+          nume: 'Monica Iagăr',
+          partid: 'AUR',
+          zodie: 'Gemeni',
+        },
+        {
+          nume: 'Valentin Licxandru',
+          partid: 'Partidul Alternativa Dreaptă',
+          zodie: 'Rac',
+        },
+        {
+          nume: 'Ana Maria Mihaela Ştefan',
+          partid: 'Alianţa Dreapta Unită (USR – PMP – Forţa Dreptei)',
+          zodie: 'Taur',
+        },
+        {
+          nume: 'Daniel Tulugea',
+          partid: 'Partidul S.O.S. România',
+          zodie: 'Berbec',
+        },
       ];
 
       function filtrareCandidati() {
         const zodieSelectata = document.getElementById('zodie-select').value;
         console.log(zodieSelectata);
         const rezultate = document.getElementById('rezultate');
-        rezultate.innerHTML = ''; // Curăță rezultatele anterioare
+        rezultate.innerHTML = '';
 
         if (zodieSelectata) {
           const candidatiFiltrati = candidati.filter(
             (candidat) => candidat.zodie.toLowerCase() === zodieSelectata
           );
 
-          candidatiFiltrati.forEach((candidat) => {
-            const candidateName = document.createElement('h3');
-            candidateName.textContent = `Primarul tau este: ${candidat.nume}
-             de la ${candidat.partid}`;
-            rezultate.appendChild(candidateName);
-          });
+          const candidateName = document.createElement('h3');
 
+          if(candidatiFiltrati.lenght >= 2){
+            const position = Math.floor(Math.random() * 10) + 1;
+            candidateName.textContent = `Candidatul tau este ${candidatiFiltrati[position].nume}
+             de la ${candidatiFiltrati[position].partid}`;
+          } else {
+            candidateName.textContent = `Candidatul tau este ${candidatiFiltrati[0].nume}
+             de la ${candidatiFiltrati[0].partid}`;
+          }
+
+          // candidatiFiltrati.forEach((candidat) => {
+          //   const candidateName = document.createElement('h3');
+          //   candidateName.textContent = `Candidatul tau este ${candidat.nume}
+          //    de la ${candidat.partid}`;
+          //   rezultate.appendChild(candidateName);
+          // });
+
+          rezultate.appendChild(candidateName);
           if (candidatiFiltrati.length === 0) {
             rezultate.textContent =
               'Nu există candidați pentru zodia selectată.';
@@ -133,6 +233,8 @@
           rezultate.textContent = 'Te rog selectează o zodie.';
         }
       }
+
+      
     </script>
   </body>
 </html>
