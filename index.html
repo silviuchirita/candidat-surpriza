@@ -16,13 +16,13 @@
   </head>
   <body>
     <div class="container mt-5">
-      <h1 class="text-center">
-        Candidatul care ți se potrivește după zodia ta
-      </h1>
+      <h2 class="text-center">
+        Candidatul care ți se potrivește in functie de zodie
+      </h2>
       <div class="row justify-content-center mt-3">
         <div class="col-md-6">
           <select class="form-control" id="zodie-select" name="zodie-select">
-            <option value="">Selectează zodia</option>
+            <option value="">Alege zodia</option>
             <option value="berbec">Berbec</option>
             <option value="taur">Taur</option>
             <option value="gemeni">Gemeni</option>
@@ -210,10 +210,10 @@
 
           if(candidatiFiltrati.lenght >= 2){
             const position = Math.floor(Math.random() * 10) + 1;
-            candidateName.textContent = `Candidatul tau este ${candidatiFiltrati[position].nume}
+            candidateName.textContent = `${candidatiFiltrati[position].nume}
              de la ${candidatiFiltrati[position].partid}`;
           } else {
-            candidateName.textContent = `Candidatul tau este ${candidatiFiltrati[0].nume}
+            candidateName.textContent = `${candidatiFiltrati[0].nume}
              de la ${candidatiFiltrati[0].partid}`;
           }
 
@@ -225,6 +225,7 @@
           // });
 
           rezultate.appendChild(candidateName);
+          
           if (candidatiFiltrati.length === 0) {
             rezultate.textContent =
               'Nu există candidați pentru zodia selectată.';
